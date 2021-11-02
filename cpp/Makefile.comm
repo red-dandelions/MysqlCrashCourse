@@ -1,0 +1,6 @@
+MYSQL_CONCPP_DIR=/usr/include/mysql-cppconn 
+CPPFLAGS= -I$(MYSQL_CONCPP_DIR) -I$(ROOT)/util
+LDDIR = -L$(ROOT)/lib
+LDLIBS= -lmysqlcppconn8 -lutil -Wall
+CXXFLAGS= -std=c++11
+

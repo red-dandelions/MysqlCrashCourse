@@ -1,11 +1,8 @@
-MYSQL_CONCPP_DIR=/usr/include/mysql-cppconn
-CPPFLAGS= -I $(MYSQL_CONCPP_DIR)
-LDLIBS= -lmysqlcppconn8
-CXXFLAGS= -std=c++11
-
+ROOT=..
+include $(ROOT)/Makefile.comm
 main : main.o
-	g++ main.o $(LDLIBS) -o main
+	@(g++ main.o $(LDDIR) $(LDLIBS) -o main)
 main.o : main.cpp
-	g++ $(CPPFLAGS) $(CXXFLAGS) -c main.cpp
+	@(g++ $(CPPFLAGS) $(CXXFLAGS) -c main.cpp)
 clean:
-	rm main main.o
+	@rm -f main main.o

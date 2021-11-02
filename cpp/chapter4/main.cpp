@@ -1,11 +1,6 @@
 #include <mysqlx/xdevapi.h>
-
-#include <string>
 #include <iostream>
-#include <list>
-#include <iomanip>
-#include <algorithm>
-#include <sstream>
+#include "util.h"
 
 using namespace std;
 using namespace mysqlx;
@@ -18,11 +13,8 @@ const std::string DATABASE  = "test";
 const int PORT              = 33060;
 
 RowResult res;
-list<Row> rows;
 
 void func(Session&);
-void print(std::string);
-void output(RowResult&);
 
 int main() {
 
@@ -55,7 +47,7 @@ void func(Session &sess) {
     print("connect to table: " + TABLENAME);
     cout << endl;
 
-    cout << setiosflags(ios::fixed) << setprecision(2) << setiosflags(ios::left);
+   // cout << setiosflags(ios::fixed) << setprecision(2) << setiosflags(ios::left);
 
     //4-2
     //select prod_name from products;
@@ -106,66 +98,5 @@ void func(Session &sess) {
     //4-7
     //限定名
     //select products.prod_name from test.products;
-
-}
-
-void print(std::string str) {
-
-    std::string s(10, '-');
-    s += "  " + str + "  ";
-    int len = 80 - s.size();
-    if (len > 0) {
-        std::string tmp(len, '-');
-        s += tmp;
-    }
-
-    cout << s << endl;
-
-}
-
-void output(RowResult& rres) {
-
-    int cols    = rres.getColumnCount();
-    rows        = rres.fetchAll();
-    vector<int> columnlen(cols, 20);
-
-    auto updateCol = [&]() {
-        for (const auto &row : rows) {
-            for (int i = 0; i < cols; ++i) {
-                std::string tmp;
-                stringstream strm;
-                strm << row[i] << endl;
-                getline(strm, tmp);
-                columnlen[i] = max(columnlen[i], int(tmp.size() + 2));
-            }
-        }
-    };
-    auto outline = [&]() {
-        for (const int &i : columnlen) {
-            cout << "+" << std::string(i - 2,'-');
-        }
-        cout << "+" << endl;
-    };
-    auto outColumnName = [&]() {
-        for (int i = 0; i < cols; ++i) {
-            cout << "| " << setw(columnlen[i] - 3) << rres.getColumn(i).getColumnName();
-        }
-        cout << "|" << endl;
-    };
-    auto outdata = [&]() {
-        for (const auto &row : rows) {
-            for(int i = 0; i < cols; ++i) {
-                cout << "|" << setw(columnlen[i] - 2) << row[i];
-            }
-            cout << "|" << endl;
-        }
-    };
-
-    updateCol();
-    outline();
-    outColumnName();
-    outline();
-    outdata();
-    outline();
 
 }
