@@ -29,7 +29,7 @@ static void updateCol(std::vector<int>& arr, std::list<mysqlx::Row>& rows) {
             std::stringstream strm;
             strm << row[i] << std::endl;
             std::getline(strm, tmp);
-            arr[i] = std::max(arr[i], int(tmp.size() + 2));
+            arr[i] = std::max(arr[i], int(tmp.size() + 4));
         }
     }
 }
@@ -41,14 +41,14 @@ static void outline(std::vector<int>& arr) {
 }
 static void outColumnName(std::vector<int>& arr, mysqlx::RowResult& rres) {
     for (int i = 0; i < arr.size(); ++i) {
-        std::cout << "| " << std::setw(arr[i] - 3) << rres.getColumn(i).getColumnName();
+        std::cout << "| " << std::setw(arr[i] - 3) << rres.getColumn(i).getColumnLabel();
     }
     std::cout << "|" << std::endl;
 }
 static void outdata(std::vector<int>& arr, std::list<mysqlx::Row>& rows) {
     for (const auto &row : rows) {
         for(int i = 0; i < arr.size(); ++i) {
-            std::cout << "|" << std::setw(arr[i] - 2) << row[i];
+            std::cout << "| " << std::setw(arr[i] - 3) << row[i];
         }
         std::cout << "|" << std::endl;
     }
@@ -60,7 +60,10 @@ void output(mysqlx::RowResult& rres) {
     
     int cols    = rres.getColumnCount();
     std::list<mysqlx::Row> rows = rres.fetchAll();
-    std::vector<int> columnlen(cols, 20);
+    std::vector<int> columnlen;
+    for (int i = 0; i < cols; ++i) {
+        columnlen.push_back(int(std::string(rres.getColumn(i).getColumnLabel()).size()) + 4);
+    }
 
     updateCol(columnlen, rows);
     outline(columnlen);

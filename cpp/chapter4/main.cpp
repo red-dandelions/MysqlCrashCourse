@@ -47,8 +47,6 @@ void func(Session &sess) {
     print("connect to table: " + TABLENAME);
     cout << endl;
 
-   // cout << setiosflags(ios::fixed) << setprecision(2) << setiosflags(ios::left);
-
     //4-2
     //select prod_name from products;
     print("4-2");
