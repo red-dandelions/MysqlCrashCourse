@@ -80,7 +80,6 @@ void func(Session &sess) {
             "order by prod_price DESC;" << endl;
     res = tb.select("prod_id", "prod_price", "prod_name")
             .orderBy("prod_price DESC")
-            //.bind("param", "DESC")
             .execute();
     output(res);
     cout << endl;
