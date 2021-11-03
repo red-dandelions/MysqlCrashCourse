@@ -1,4 +1,4 @@
-DIRS = util chapter4 chapter5 chapter6 chapter7 chapter8
+DIRS = util chapter4 chapter5 chapter6 chapter7 chapter8 chapter9
 
 all:
 	@for i in $(DIRS); do \
