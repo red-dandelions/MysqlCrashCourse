@@ -110,7 +110,6 @@ void func(Session &sess) {
     //select prod_id, prod_name
     //from products
     //where prod_name like '% ton anvil';
-    print("8-1-4");
     cout << "sql: select prod_id, prod_name "
             "from products "
             "where prod_name like '% ton anvil';" << endl;
