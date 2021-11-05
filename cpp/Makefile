@@ -1,5 +1,6 @@
 DIRS = util chapter4 chapter5 chapter6 chapter7 chapter8 chapter9 chapter10	\
-			 chapter11 chapter12 chapter13 chapter14 chapter15 chapter16 chapter17
+			 chapter11 chapter12 chapter13 chapter14 chapter15 chapter16 chapter17 \
+			 chapter19 chapter20
 
 all:
 	@for i in $(DIRS); do \
